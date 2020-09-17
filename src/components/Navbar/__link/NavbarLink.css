@@ -1,0 +1,22 @@
+.navbar__link {
+  display: inline-block;
+  padding: 10px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: white;
+  text-align: center;
+}
+
+.navbar__link:hover {
+  opacity: 0.8;
+}
+
+.navbar__link:hover,
+.navbar__link_active {
+  color: gold;
+}
+
+.navbar__link_uppercase {
+  text-transform: uppercase;
+}

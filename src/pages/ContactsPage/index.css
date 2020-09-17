@@ -1,0 +1,11 @@
+.contact-img {
+  background: center/cover no-repeat url('../../images/main-bg.jpg') ;
+}
+
+.ymap {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 30px 0;
+  border: 2px solid #AAA;
+  box-shadow: 5px 5px 25px #DDD;
+}

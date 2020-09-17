@@ -1,0 +1,66 @@
+.road-images {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.road-images__img {
+  position: absolute;
+  height: auto;
+  padding: 20px;
+  flex: 0 0 auto;
+}
+
+.road-images__img_forward {
+  animation: forward 3s linear ;
+}
+
+.road-images__img_forward2 {
+  animation: forward2 3s linear ;
+}
+
+.road-images__img_forward_horiz {
+  animation: forward_horiz 3s linear ;
+}
+
+.road-images__img_forward2_horiz {
+  animation: forward_horiz2 3s linear ;
+}
+
+.road-images__img_backward {
+  animation: backward 1s linear;
+}
+
+@keyframes forward {
+  100% {
+    transform: translateY(250px);
+  }
+}
+
+@keyframes forward2 {
+  100% {
+    transform: translateY(250px);
+  }
+}
+
+@keyframes forward_horiz {
+  100% {
+    transform: translateX(250px);
+  }
+}
+
+@keyframes forward_horiz2 {
+  100% {
+    transform: translateX(250px);
+  }
+}
+
+@keyframes backward {
+  100% {
+    transform: translateY(-250px);
+  }
+}
