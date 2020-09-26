@@ -1,0 +1,22 @@
+.popup {
+  visibility: hidden;
+  top: 50%;
+  left: 50%;
+  margin-left: -150px;
+  background: white;
+  width: 300px;
+  padding: 15px;
+  text-align: center;
+  font-weight: bold;
+  border: 5px solid #555;
+  color:  #555;
+  transition: opacity 1s ease-in-out;
+  opacity: 0;
+
+  &_visible {
+    visibility: visible;
+    position: fixed;
+    opacity: 0.9;
+    transition: opacity 1s ease-in-out;
+  }
+}
