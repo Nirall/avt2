@@ -123,14 +123,14 @@ function FormOrder(props) {
         />
         <div className = "form-order__error"> { telError } </div>
         <p>Прикрепить файл</p>
-        <input type = "file" name = "file" multiple/>
+        <input type = "file" name = "file" multiple onChange = { (e) => fileErrorState('') }/>
         <div className = "form-order__error"> { fileError } </div>
         <input
           type = "text" name = "message" onChange = { (e) => messageHandler(e.target.value) } placeholder = "Сообщение"
           className = { messageError ? "form-order__input form-order__input_wrong" : "form-order__input" } value = { message }
         />
         <div className = "form-order__error"> { messageError } </div>
-        <button type = "submit" onChange = { (e) => fileErrorState('') }>Отправить</button>
+        <button type = "submit">Отправить</button>
         <p className = "form-order__description">Указывая свои данные, <Link to = "/privacy">Вы соглашаетесь с нашей Политикой конфиденциальности</Link></p>
       </form>
       <Popup display = { popupDisplay } message = { popupMessage }/>
