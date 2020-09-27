@@ -48,7 +48,7 @@ module.exports = {
           ]
       },
       {
-        test: /\.(png|jpe?g|gif|svg)$/i,
+        test: /(?<!favicon.*)\.(png|jpe?g|gif|svg)$/i,
         use: [
           {
             loader: "file-loader",
@@ -59,7 +59,7 @@ module.exports = {
         ],
       },
       {
-        test: /favicon.*\.(png|xml|svg|iso)$/i,
+        test: /favicon.*\.(png|xml|svg|ico)$/i,
         use: [
           {
             loader: "file-loader",
