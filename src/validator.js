@@ -24,12 +24,12 @@ class Validator {
       this.title = 'error';
       return "Поле Ф.И.О обязательно для заполнения";
     }
-
+    /*
     if (!/^[а-яА-ЯёЁ]+\s[а-яА-ЯёЁ]+\s[а-яА-ЯёЁ]+$/.test(fullname)) {
       this.title = 'error';
       return 'Введите корректное Ф.И.О формата "Иванов Иван Иваныч"';
     }
-
+    */
     if (fullname.length > 40) {
       this.title = 'error';
       return "Ф.И.О не должно превышать 40 символов";
@@ -67,7 +67,7 @@ class Validator {
       return "Номер телефона не должен превышать 20 символов";
     }
 
-    if (!/^[\d\+\(\)]+$/.test(tel)) {
+    if (!/^[\d\+\(\)\-\s]+$/.test(tel)) {
       this.title = 'error';
       return "Введите корректный телефон";
     }
@@ -76,9 +76,9 @@ class Validator {
   messageCheck = (message) => {
     if (!message) return;
 
-    if (message.length > 100) {
+    if (message.length > 300) {
       this.title = 'error';
-      return "Длина сообщения не должна превышать 100 символов";
+      return "Длина сообщения не должна превышать 300 символов";
     }
   }
 
