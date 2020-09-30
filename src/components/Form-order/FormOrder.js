@@ -17,7 +17,7 @@ function FormOrder(props) {
   const [messageError, messageErrorState] = useState('');
   const [fileError, fileErrorState] = useState('');
   const [popupDisplay, popupDisplayState] = useState(false);
-  const [popupMessage, popupMessageState] = useState(false);
+  const [popupMessage, popupMessageState] = useState('');
   const validator = new Validator();
 
   const fullnameHandler = (text) => {
@@ -47,36 +47,54 @@ function FormOrder(props) {
   }
 
   const errorsHandler = (response) => {
-    if (response.title === 'fail') {
-      popupHandler('Письмо не отправлено. Ошибка сервера')
+    if (response.title === 'fail' || !response.title) {
+      popupHandler('Письмо не отправлено. Ошибка сервера');
       return;
     } else if (response.title === 'success') {
-      popupHandler('Письмо успешно отправлено')
+      popupHandler('Письмо успешно отправлено');
       return;
     }
 
-    Object.keys(response.data).map((key) => {
-      switch (key) {
-        case 'fullnameError':
-          fullnameErrorState(response.data[key]);
-          break;
-        case 'companyError':
-          companyErrorState(response.data[key]);
-          break;
-        case 'emailError':
-          emailErrorState(response.data[key]);
-          break;
-        case 'telError':
-          telErrorState(response.data[key]);
-          break;
-        case 'messageError':
-          messageErrorState(response.data[key]);
-          break;
-        case 'fileError':
-          fileErrorState(response.data[key]);
-          break;
-      }
-    });
+    if (response.data) {
+      Object.keys(response.data).map((key) => {
+        switch (key) {
+          case 'fullnameError':
+            fullnameErrorState(response.data[key]);
+            break;
+          case 'companyError':
+            companyErrorState(response.data[key]);
+            break;
+          case 'emailError':
+            emailErrorState(response.data[key]);
+            break;
+          case 'telError':
+            telErrorState(response.data[key]);
+            break;
+          case 'messageError':
+            messageErrorState(response.data[key]);
+            break;
+          case 'fileError':
+            fileErrorState(response.data[key]);
+            break;
+        }
+      });
+    }
+  }
+
+  let closeBtn = null;
+  let title = <h2 className = "form-order__title">Отправить заявку</h2>;
+  let header = "Воспользуйтесь формой обратной связи";
+  let formClass = "form-order js-form-order";
+  let formClassSelector = ".js-form-order";
+  let wrapperClass = "form-order-wrapper";
+
+  if (props.type === "popup") {
+    closeBtn = <span className = "form-order__close" onClick = { props.onCloseHandler }>&#10006;</span>
+    title = null;
+    header = "ОТПРАВИТЬ ЗАЯВКУ";
+    formClass = "form-order form-order_type_popup js-form-order_type_popup";
+    formClassSelector = ".js-form-order_type_popup";
+    wrapperClass += " form-order-wrapper_type_popup";
   }
 
   const onSubmitHandler = (e) => {
@@ -85,7 +103,7 @@ function FormOrder(props) {
       return null;
     }
 
-    const formData = new FormData(document.querySelector('.form-order'));
+    const formData = new FormData(document.querySelector(formClassSelector));
     formData.append('form', 'take-order');
 
     fetch('/order', {
@@ -94,14 +112,15 @@ function FormOrder(props) {
     })
       .then((response) => response.json())
       .then((data) => errorsHandler(data))
-      .catch((err) => console.log('Ошибка ответа от сервера', err));
+      .catch((err) => errorsHandler(err));
   }
 
   return (
-    <div className = "form-order-wrapper">
-      <h2 className = "form-order__title">Отправить заявку</h2>
-      <form className = "form-order" action = '/order' method = 'post' onSubmit = { (e) => onSubmitHandler(e) }>
-        <p>Воспользуйтесь формой обратной связи</p>
+    <div className = { wrapperClass }>
+      { title }
+      <form className = { formClass } action = '/order' method = 'post' onSubmit = { (e) => onSubmitHandler(e) }>
+        { closeBtn }
+        <p>{ header }</p>
         <input
           type = "text" name = "fullname" onChange = { (e) => fullnameHandler(e.target.value) } placeholder = "Ф.И.О."
           className = { fullnameError ? "form-order__input form-order__input_wrong" : "form-order__input" } value = { fullname }
@@ -131,7 +150,7 @@ function FormOrder(props) {
           className = { messageError ? "form-order__input form-order__input_wrong" : "form-order__input" } value = { message }
         />
         <div className = "form-order__error"> { messageError } </div>
-        <button type = "submit">Отправить</button>
+        <button className = "form-order__btn" type = "submit">Отправить</button>
         <p className = "form-order__description">Указывая свои данные,
           <Link to = "/privacy" className = "form-order__reference"> Вы соглашаетесь с нашей Политикой конфиденциальности</Link>
         </p>

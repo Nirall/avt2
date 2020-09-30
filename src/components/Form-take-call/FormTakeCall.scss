@@ -1,4 +1,4 @@
-.form-take-order__modal {
+.form-call__modal {
   box-sizing: border-box;
   position: fixed;
   top: 0;
@@ -13,11 +13,11 @@
   z-index: 10;
 }
 
-.form-take-order__modal_none {
+.form-call__modal_none {
   display: none;
 }
 
-.form-take-order {
+.form-call {
   box-sizing: border-box;
   width: 100%;
   max-width: 470px;
@@ -33,7 +33,7 @@
   background: white;
 }
 
-.form-take-order__close {
+.form-call__close {
   position: absolute;
   top: 0;
   right: 0;
@@ -42,27 +42,38 @@
   cursor: pointer;
 }
 
-.form-take-order__title {
+.form-call__title {
   margin-top: 0;
   text-transform: uppercase;
   font-size: 18px;
-  font-weight: bold;
   text-align: center;
 }
 
-.form-take-order__input {
+.form-call__error {
+  color: red;
+  font-size: 14px;
+  align-self: flex-start;
+}
+
+.form-call__input {
   box-sizing: border-box;
   width: 100%;
   padding: 10px 16px;
   margin: 10px 0;
   border: 1px solid #BBB;
+
+  &::placeholder {
+    opacity: 0.5;
+  }
+
+  &_wrong {
+    border-color: red;
+    color: red;
+    outline-color: red;
+  }
 }
 
-.form-take-order__input::placeholder {
-  opacity: 0.5;
-}
-
-.form-take-order__submit {
+.form-call__submit {
   margin: 10px;
   padding: 10px 20px;
   border: 0;
@@ -73,16 +84,16 @@
   cursor: pointer;
 }
 
-.form-take-order__submit:hover {
+.form-call__submit:hover {
   opacity: 0.7;
 }
 
-.form-take-order__description {
+.form-call__description {
   margin: 0;
   font-size: 14px;
   text-align: center;
 }
 
-.form-take-order a {
+.form-call__reference {
   color: #333;
 }

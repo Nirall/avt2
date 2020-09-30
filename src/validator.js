@@ -73,6 +73,23 @@ class Validator {
     }
   }
 
+  telReqCheck = (tel) => {
+    if (validator.isEmpty(tel, { ignore_whitespace: true })) {
+      this.title = 'error';
+      return "Поле обязательно для заполнения";
+    }
+
+    if (tel.length > 20) {
+      this.title = 'error';
+      return "Номер телефона не должен превышать 20 символов";
+    }
+
+    if (!/^[\d\+\(\)\-\s]+$/.test(tel)) {
+      this.title = 'error';
+      return "Введите корректный телефон";
+    }
+  }
+
   messageCheck = (message) => {
     if (!message) return;
 
@@ -82,8 +99,51 @@ class Validator {
     }
   }
 
-  formOrderCheck = (body) => {
-    Object.keys(body).map((key) => {
+  formCheck = (body) => {
+    if (body.form === 'take-order') {
+      this.orderCheck(body);
+    } else {
+      this.callCheck(body);
+    }
+
+    return ({ title: this.title, data: this.data });
+  }
+
+  asyncFormCheck = (body) => {
+    return new Promise((resolve, reject) => {
+      const result = this.formCheck(body);
+      if (result.title === 'error') {
+        return reject(result);
+      }
+
+      resolve(result);
+    });
+  }
+
+  orderCheck = (body) => {
+      Object.keys(body).map((key, index) => {
+        switch (key) {
+          case 'fullname':
+            this.data.fullnameError = this.fullnameCheck(body[key]);
+            break;
+          case 'company':
+            this.data.companyError = this.companyCheck(body[key]);
+            break;
+          case 'email':
+            this.data.emailError = this.emailCheck(body[key]);
+            break;
+          case 'tel':
+            this.data.telError = this.telCheck(body[key]);
+            break;
+          case 'message':
+            this.data.messageError = this.messageCheck(body[key]);
+            break;
+        }
+    });
+  }
+
+  callCheck = (body) => {
+    Object.keys(body).map((key, index) => {
       switch (key) {
         case 'fullname':
           this.data.fullnameError = this.fullnameCheck(body[key]);
@@ -91,20 +151,12 @@ class Validator {
         case 'company':
           this.data.companyError = this.companyCheck(body[key]);
           break;
-        case 'email':
-          this.data.emailError = this.emailCheck(body[key]);
-          break;
         case 'tel':
-          this.data.telError = this.telCheck(body[key]);
-          break;
-        case 'message':
-          this.data.messageError = this.messageCheck(body[key]);
+          this.data.telError = this.telReqCheck(body[key]);
           break;
       }
-    })
-
-    return [this.title, this.data];
-  }
+  });
+}
 }
 
 module.exports = Validator;
