@@ -1,8 +1,11 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { brassArrImgs, alumArrImgs, coppArrImgs } from "./images";
 import Slider from '../../components/Slider/Slider';
 import SamplesImg from './__img/SamplesImg';
-import './index.css';
+import Navbar from '../../components/Navbar/Navbar';
+import Footer from '../../components/Footer/Footer';
+import './samplesPage.css';
 
 class SamplesPage extends React.Component {
   constructor(props) {
@@ -56,11 +59,11 @@ class SamplesPage extends React.Component {
     const brassListImgs = brassArrImgs.map((img, index) => {
       return <SamplesImg img = { img } key = { img } index = { index } clickHandler  = { this.imgClickHandler } />
     })
-  
+
     const alumListImgs = alumArrImgs.map((img, index) => {
       return <SamplesImg img = { img } key = { img } index = { index } clickHandler  = { this.imgClickHandler } />
     })
-  
+
     const coppListImgs = coppArrImgs.map((img, index) => {
       return <SamplesImg img = { img } key = { img } index = { index } clickHandler  = { this.imgClickHandler } />
     })
@@ -87,7 +90,10 @@ class SamplesPage extends React.Component {
     let isShowSlider = (this.state.activeSlider || this.state.isCurrentWidthLess);
 
     return (
-      <div>
+      <>
+        <header>
+          <Navbar />
+        </header>
         <div className = "top-img samples-img"></div>
         <main className = "main">
           <h1>ОБРАЗЦЫ ИЗДЕЛИЙ</h1>
@@ -121,7 +127,7 @@ class SamplesPage extends React.Component {
               <p className = "main-idea">
                 Наше автоматизированное современное оборудование гарантируют высокое качество
                 продукции и может обеспечить крупносерийное и массовое производство изделий заданной точности.
-                <br /> 
+                <br />
                 До 500 000 деталей в месяц.
               </p>
             </aside>
@@ -137,7 +143,7 @@ class SamplesPage extends React.Component {
           </div>
         </main>
         <div className = "samples__wrapper-slider">
-          { isShowSlider 
+          { isShowSlider
             && <Slider
               images = { activeArr }
               activeImg = { this.state.activeImg }
@@ -148,9 +154,10 @@ class SamplesPage extends React.Component {
             />
           }
         </div>
-      </div>
+      <Footer />
+    </>
     )
   }
 }
 
-export default SamplesPage;
+ReactDOM.render(< SamplesPage />, document.getElementById('samples'));

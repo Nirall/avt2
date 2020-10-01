@@ -47,8 +47,12 @@ li {
   justify-content: space-between;
 }
 
-article {
+.article {
   padding: 0 20px;
+
+  &_font_small {
+    font-size: 18px;
+  }
 }
 
 aside {

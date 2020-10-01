@@ -1,8 +1,11 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Slider from '../../components/Slider/Slider';
 import Carousel from "../../components/Carousel/Carousel";
 import FormOrder from "../../components/Form-order/FormOrder";
-import './index.css';
+import Navbar from '../../components/Navbar/Navbar';
+import Footer from '../../components/Footer/Footer';
+import './hotDieForgingPage.css';
 
 import img1 from './sliderImgs/1.jpg';
 import img2 from './sliderImgs/2.jpg';
@@ -17,12 +20,15 @@ import img10 from './sliderImgs/10.jpg';
 
 function HotDieForgingPage(props) {
   return (
-    <div>
+    <>
+      <header>
+        <Navbar />
+      </header>
       <div className = "top-img stamp-img"></div>
       <main className = "main">
         <h1>ГОРЯЧАЯ ОБЪЕМНАЯ ШТАМПОВКА</h1>
         <div className = "content">
-          <article className = "article">
+          <article className = "article article_font_small">
             Участок горячей объемной штамповки состоит:
             <ul>
               <li>автоматические станки для резки заготовки</li>
@@ -53,8 +59,9 @@ function HotDieForgingPage(props) {
         <Carousel />
         <FormOrder />
       </main>
-    </div>
+      <Footer />
+    </>
   )
 }
 
-export default HotDieForgingPage;
+ReactDOM.render(< HotDieForgingPage />, document.getElementById('forging'));

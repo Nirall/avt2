@@ -4,12 +4,41 @@ const cssExtract = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: {
+    contacts: path.resolve(__dirname, "src/pages/ContactsPage/ContactsPage.js"),
+    home: path.resolve(__dirname, "src/pages/HomePage/HomePage.js"),
+    forging: path.resolve(__dirname, "src/pages/HotDieForgingPage/HotDieForgingPage.js"),
+    processing: path.resolve(__dirname, "src/pages/MechanicalProcessingPage/MechanicalProcessingPage.js"),
+    privacy: path.resolve(__dirname, "src/pages/PrivacyPage/PrivacyPage.js"),
+    samples: path.resolve(__dirname, "src/pages/SamplesPage/SamplesPage.js"),
+    index: path.resolve(__dirname, "src/index.js"),
+  },
   output: {
     path: path.join(__dirname, "/dist"),
-    filename: "bundle.js"
+    filename: "[name].js"
   },
-  devtool: "inline-source-map",
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        default: {
+
+        },
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+        },
+        styles: {
+          name: 'style',
+          test: /\.s?css$/,
+          chunks: 'all',
+          enforce: true,
+        },
+      },
+      name: true,
+      chunks: 'all'
+    }
+  },
+  //devtool: "inline-source-map",
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     port: 3000,
@@ -17,12 +46,39 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin,
     new htmlPlugin({
-      template: "src/index.html",
+      template: "src/pages/ContactsPage/contacts.html",
+      inject: false,
+      filename: "contacts.html",
+    }),
+    new htmlPlugin({
+      template: "src/pages/HomePage/home.html",
       inject: false,
       filename: "index.html",
     }),
+    new htmlPlugin({
+      template: "src/pages/HotDieForgingPage/forging.html",
+      inject: false,
+      filename: "forging.html",
+    }),
+    new htmlPlugin({
+      template: "src/pages/MechanicalProcessingPage/processing.html",
+      inject: false,
+      filename: "processing.html",
+    }),
+    new htmlPlugin({
+      template: "src/pages/PrivacyPage/privacy.html",
+      inject: false,
+      filename: "privacy.html",
+    }),
+    new htmlPlugin({
+      template: "src/pages/SamplesPage/samples.html",
+      inject: false,
+      filename: "samples.html",
+    }),
     new cssExtract({
-      filename: "style.css",
+      ignoreOrder: true,
+      filename: "[name].css",
+      chunkFilename: "[name].css",
     }),
   ],
   module: {
@@ -42,7 +98,7 @@ module.exports = {
             {
               loader: "sass-loader",
               options: {
-                sourceMap: true,
+                //sourceMap: true,
               }
             },
           ]

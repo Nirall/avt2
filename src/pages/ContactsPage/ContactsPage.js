@@ -1,9 +1,15 @@
 import React from 'react';
-import './index.css';
+import ReactDOM from 'react-dom';
+import './contactsPage.css';
+import Navbar from '../../components/Navbar/Navbar';
+import Footer from '../../components/Footer/Footer';
 
 function ContactsPage(props) {
   return (
-    <div>
+    <>
+      <header>
+        <Navbar />
+      </header>
       <div className = "top-img contact-img"></div>
       <main className = "main">
         <article className = "article">
@@ -24,8 +30,9 @@ function ContactsPage(props) {
           </div>
           </article>
       </main>
-    </div>
+      <Footer />
+    </>
   )
 }
 
-export default ContactsPage;
+ReactDOM.render(< ContactsPage />, document.getElementById('contacts'));

@@ -1,14 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import ReactDOM from 'react-dom';
 import FormOrder from '../../components/Form-order/FormOrder';
 import stepsImg from './steps.jpg';
 import RoadImages from "../../components/RoadImages/RoadImages";
 import imagesArr from "./images";
-import './index.css';
+import Navbar from '../../components/Navbar/Navbar';
+import Footer from '../../components/Footer/Footer';
+import './homePage.css';
+import '../index.scss';
 
 function HomePage(props) {
   return (
-    <div>
+    <>
+      <header>
+        <Navbar />
+      </header>
       <div className = "home-img">
         <div className = "home-img__background">
           <div className = "home-img__content">
@@ -17,7 +23,7 @@ function HomePage(props) {
               меди и медных сплавов для различных отраслей промышленности.</p>
               <p>Гарантируем высокое качество продукции за счет применения передовых
               технологических процессов.</p>
-              <Link to = '/samples' className = "home-img__button">Образцы изделий</Link>
+              <a href = '/samples' className = "home-img__button">Образцы изделий</a>
             </div>
             <div className = "home-img__road-images">
               <RoadImages images = { imagesArr[0] }/>
@@ -75,8 +81,9 @@ function HomePage(props) {
         </div>
         <FormOrder />
       </main>
-    </div>
+      <Footer />
+    </>
   )
 }
 
-export default HomePage;
+ReactDOM.render(< HomePage />, document.getElementById('home'));

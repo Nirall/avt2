@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import './FormOrder.scss';
-import { Link } from 'react-router-dom';
 import Validator from '../../validator';
 import Popup from '../Popup/Popup';
 
@@ -120,7 +119,7 @@ function FormOrder(props) {
       { title }
       <form className = { formClass } action = '/order' method = 'post' onSubmit = { (e) => onSubmitHandler(e) }>
         { closeBtn }
-        <p>{ header }</p>
+        <p className = "form-order__header">{ header }</p>
         <input
           type = "text" name = "fullname" onChange = { (e) => fullnameHandler(e.target.value) } placeholder = "Ф.И.О."
           className = { fullnameError ? "form-order__input form-order__input_wrong" : "form-order__input" } value = { fullname }
@@ -152,7 +151,7 @@ function FormOrder(props) {
         <div className = "form-order__error"> { messageError } </div>
         <button className = "form-order__btn" type = "submit">Отправить</button>
         <p className = "form-order__description">Указывая свои данные,
-          <Link to = "/privacy" className = "form-order__reference"> Вы соглашаетесь с нашей Политикой конфиденциальности</Link>
+          <a href = "/privacy" className = "form-order__reference"> Вы соглашаетесь с нашей Политикой конфиденциальности</a>
         </p>
       </form>
       <Popup display = { popupDisplay } message = { popupMessage }/>

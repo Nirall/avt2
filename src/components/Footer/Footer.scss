@@ -6,6 +6,29 @@
   color: white;
   display: flex;
   justify-content: space-between;
+
+  &__link {
+    display: inline-block;
+    padding: 10px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+    text-align: center;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &:hover,
+    &_active {
+      color: gold;
+    }
+
+    &_uppercase {
+      text-transform: uppercase;
+    }
+  }
 }
 
 .footer__item {

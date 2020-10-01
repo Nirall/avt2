@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './FormTakeCall.scss';
-import { Link } from 'react-router-dom';
 import Validator from '../../validator';
 import Popup from '../Popup/Popup';
 
@@ -116,7 +115,7 @@ function FormTakeCall(props) {
           Отправить
         </button>
         <p className = "form-call__description">Указывая свои данные,
-          <Link to = "/privacy" className = "form-call__reference"> Вы соглашаетесь с нашей Политикой конфиденциальности</Link>
+          <a href = "/privacy" className = "form-call__reference"> Вы соглашаетесь с нашей Политикой конфиденциальности</a>
         </p>
       </form>
       <Popup display = { popupDisplay } message = { popupMessage }/>

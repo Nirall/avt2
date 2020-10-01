@@ -1,14 +1,14 @@
 import React from 'react';
-import './Footer.css';
-import NavbarLink from '../Navbar/__link/NavbarLink';
+import './Footer.scss';
 import URLs from '../../URLs';
 
 function Footer(props) {
   const navList = URLs.map((url) => {
-    if (url.path === '/privacy') {
-      return null;
-    } 
-    return <NavbarLink path = { url.path } name = { url.name } key = { url.name }/>
+    return (
+      <a href = { url.path } key = { url.name } className = "footer__link footer__link_uppercase">
+        { url.name }
+      </a>
+    )
   });
 
   return (

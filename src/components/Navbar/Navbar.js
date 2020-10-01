@@ -1,7 +1,6 @@
 import React from 'react';
 import logo from './logo.jpg';
-import './Navbar.css';
-import NavbarLink from './__link/NavbarLink';
+import './Navbar.scss';
 import URLs from '../../URLs';
 import FormTakeCall from '../../components/Form-take-call/FormTakeCall';
 import FormTakeOrder from '../../components/Form-take-order/FormTakeOrder';
@@ -29,20 +28,19 @@ class Navbar extends React.Component {
 
   render() {
     const navList = URLs.map((url) => {
-      if (url.path === '/privacy') {
-        return null;
-      } 
       return (
         <div key = { url.name } onClick = { () => document.querySelector(".navbar__list").classList.remove("navbar__list_visible") }>
-          <NavbarLink path = { url.path } name = { url.name } key = { url.name } />
+          <a href = { url.path } key = { url.name } className = "navbar__link navbar__link_uppercase">
+            { url.name }
+          </a>
         </div>
       )
     });
-  
+
     const burgerHandler = () => {
       document.querySelector(".navbar__list").classList.toggle("navbar__list_visible");
     }
-  
+
     return (
       <nav className = "navbar">
         <div className = "navbar__burger" onClick = { burgerHandler }>&#9776;</div>

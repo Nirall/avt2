@@ -1,6 +1,5 @@
 import React from 'react';
 import './FormTakeOrder.scss';
-import { Link } from 'react-router-dom';
 import FormOrder from '../Form-order/FormOrder';
 
 function FormTakeOrder(props) {

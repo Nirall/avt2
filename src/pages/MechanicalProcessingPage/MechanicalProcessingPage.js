@@ -1,8 +1,11 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Slider from '../../components/Slider/Slider';
 import Carousel from "../../components/Carousel/Carousel";
 import FormOrder from "../../components/Form-order/FormOrder";
-import './index.css';
+import Navbar from '../../components/Navbar/Navbar';
+import Footer from '../../components/Footer/Footer';
+import './mechanicalProcessingPage.css';
 
 import img1 from './1.jpg';
 import img2 from './2.jpg';
@@ -11,7 +14,10 @@ import img4 from './4.jpg';
 
 function MechanicalProcessingPage(props) {
   return (
-    <div>
+    <>
+      <header>
+        <Navbar />
+      </header>
       <div className = "top-img mecn-img"></div>
       <main className = "main">
         <h1>МЕХАНИЧЕСКАЯ ОБРАБОТКА</h1>
@@ -54,8 +60,9 @@ function MechanicalProcessingPage(props) {
         <Carousel />
         <FormOrder />
       </main>
-    </div>
+      <Footer />
+    </>
   )
 }
 
-export default MechanicalProcessingPage;
+ReactDOM.render(< MechanicalProcessingPage />, document.getElementById('processing'));
