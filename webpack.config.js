@@ -9,7 +9,7 @@ module.exports = {
     path: path.join(__dirname, "/dist"),
     filename: "bundle.js"
   },
-  devtool: "inline-source-map",
+  // devtool: "inline-source-map",
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     port: 3000,
